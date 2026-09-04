@@ -168,6 +168,26 @@ Example:
 
 ---
 
+## Proof of Execution
+
+### Service A – startup and request logs
+![Service A logs](screenshots/service-a-logs.png)
+
+### Service B – startup and request logs
+![Service B logs](screenshots/service-b-logs.png)
+
+### Success path – Service B calls Service A (HTTP 200)
+Both services are running. `GET /call-echo?msg=hello` on Service B proxies the request to Service A and returns its echo.
+
+![Success proof](screenshots/success-proof.png)
+
+### Failure path – Service A stopped (HTTP 503)
+Service A has been stopped. Service B catches the `ConnectionError` and returns `503 Service Unavailable` while continuing to run.
+
+![Failure proof](screenshots/failure-proof.png)
+
+---
+
 ## Lab Requirement Checklist
 
 - [x] Service A runs on port 8080
@@ -184,3 +204,4 @@ Example:
 - [x] Service B catches `Timeout` and `ConnectionError` exceptions
 - [x] Service B returns HTTP 503 with a JSON error when Service A is unavailable
 - [x] Service B continues running when Service A is stopped
+
